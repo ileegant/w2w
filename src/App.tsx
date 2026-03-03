@@ -1,9 +1,11 @@
+import { useState } from "react";
 import "./App.css";
 import { TmdbService } from "./api/tmdb-service";
 import MovieCarousel from "./components/MovieCarousel";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useMovieApi } from "./hooks/useMovieApi";
 import type { Movie } from "./types";
+import { MovieDetailsModal } from "./components/MovieDetailsModal";
 
 function App() {
   const { data: trendingMovies, loading } = useMovieApi(
@@ -11,6 +13,10 @@ function App() {
   );
   const [favorites, setFavorites] = useLocalStorage<Movie[]>("favorites", []);
   const [watched, setWatched] = useLocalStorage<Movie[]>("watched", []);
+
+  const [selectedMovieId, setSelectedMovieId] = useState<number | null>(null);
+
+  const openDetails = (id: number) => setSelectedMovieId(id);
 
   const toggleMovieInList = (
     movie: Movie,
@@ -41,6 +47,7 @@ function App() {
         onToggleWatched={toggleWatched}
         favorites={favorites}
         watched={watched}
+        onOpenDetails={openDetails}
       />
 
       <MovieCarousel
@@ -51,6 +58,7 @@ function App() {
         onToggleWatched={toggleWatched}
         favorites={favorites}
         watched={watched}
+        onOpenDetails={openDetails}
       />
 
       <MovieCarousel
@@ -61,7 +69,14 @@ function App() {
         onToggleWatched={toggleWatched}
         favorites={favorites}
         watched={watched}
+        onOpenDetails={openDetails}
       />
+      {selectedMovieId && (
+        <MovieDetailsModal
+          movieId={selectedMovieId}
+          onClose={() => setSelectedMovieId(null)}
+        />
+      )}
     </>
   );
 }
