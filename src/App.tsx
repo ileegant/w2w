@@ -1,7 +1,8 @@
 import "./App.css";
+import TrandingNow from "./components/TrandingNow";
 
 function App() {
-  return <></>;
+  return <TrandingNow />;
 }
 
 export default App;
