@@ -18,6 +18,16 @@ export default function MovieCard({
   onToggleFavorite,
   onToggleWatched,
 }: MovieCardProps) {
+  const handleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleFavorite(movie);
+  };
+
+  const handleWatched = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleWatched(movie);
+  };
+
   return (
     <div
       onClick={() => onOpenDetails(movie.id)}
@@ -36,7 +46,7 @@ export default function MovieCard({
         </div>
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
           <button
-            onClick={() => onToggleFavorite(movie)}
+            onClick={handleFavorite}
             className={`p-3 rounded-full transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 cursor-pointer ${
               isFav
                 ? "bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.5)]"
@@ -46,7 +56,7 @@ export default function MovieCard({
             <Bookmark className="w-5 h-5" />
           </button>
           <button
-            onClick={() => onToggleWatched(movie)}
+            onClick={handleWatched}
             className={`p-3 rounded-full transition-colors cursor-pointer ${
               isWatched
                 ? "bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-110"

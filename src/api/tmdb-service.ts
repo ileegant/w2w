@@ -29,4 +29,14 @@ export const TmdbService = {
     });
     return data.results;
   },
+
+  async getMovieTrailer(id: number): Promise<string | null> {
+    const { data } = await apiClient.get(`/movie/${id}/videos`);
+
+    const trailer = data.results.find(
+      (video: any) => video.type === "Trailer" && video.site === "YouTube"
+    );
+
+    return trailer ? trailer.key : data.results[0]?.key || null;
+  },
 };
