@@ -1,36 +1,31 @@
+import { useMovies } from "../context/MovieContext";
 import type { Movie } from "../types";
 import { Eye, Bookmark, Star, Calendar } from "lucide-react";
 
 interface MovieCardProps {
   movie: Movie;
-  isFav: boolean;
-  isWatched: boolean;
-  onOpenDetails: (id: number) => void;
-  onToggleFavorite: (movie: Movie) => void;
-  onToggleWatched: (movie: Movie) => void;
 }
 
-export default function MovieCard({
-  movie,
-  isFav,
-  isWatched,
-  onOpenDetails,
-  onToggleFavorite,
-  onToggleWatched,
-}: MovieCardProps) {
+export default function MovieCard({ movie }: MovieCardProps) {
+  const { favorites, watched, toggleFavorite, toggleWatched, openDetails } =
+    useMovies();
+
+  const isFav = favorites.some((fav) => fav.id === movie.id);
+  const isWatched = watched.some((w) => w.id === movie.id);
+
   const handleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onToggleFavorite(movie);
+    toggleFavorite(movie);
   };
 
   const handleWatched = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onToggleWatched(movie);
+    toggleWatched(movie);
   };
 
   return (
     <div
-      onClick={() => onOpenDetails(movie.id)}
+      onClick={() => openDetails(movie.id)}
       key={movie.id}
       className="group flex flex-col bg-neutral-900/50 border border-neutral-800 text-neutral-50 rounded-2xl p-3 gap-3 shrink-0 snap-start hover:bg-neutral-900 transition-all duration-300 hover:-translate-y-2 w-40"
     >
