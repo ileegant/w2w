@@ -4,6 +4,7 @@ import { useMovieApi } from "../hooks/useMovieApi";
 import { useState } from "react";
 import { TrailerPlayer } from "./TrailerPlayer";
 import { useMovies } from "../context/MovieContext";
+import MovieModalSkeleton from "./MovieModalSkeleton";
 
 export const MovieDetailsModal = () => {
   const { selectedMovieId, closeDetails } = useMovies();
@@ -40,9 +41,7 @@ export const MovieDetailsModal = () => {
         </button>
 
         {loading ? (
-          <div className="h-100 flex items-center justify-center text-white">
-            Завантаження...
-          </div>
+          <MovieModalSkeleton />
         ) : (
           <div className="flex flex-col md:flex-row">
             <div className="w-full md:w-1/3">
