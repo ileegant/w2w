@@ -34,7 +34,7 @@ export default function Cast({ movie }: CastProps) {
               />
             )}
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-1">
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-1">
               <div className="bg-white/10 backdrop-blur-md rounded-lg border border-white/10 p-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                 <h3 className="font-bold text-xs leading-tight text-amber-400">
                   {actor.name}
