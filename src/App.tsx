@@ -1,6 +1,6 @@
 import "./App.css";
 import MovieCarousel from "./components/MovieCarousel";
-import { MovieDetailsModal } from "./components/MovieDetailsModal";
+import { DetailCard } from "./components/MovieModal/DetailCard";
 import { useMovies } from "./context/MovieContext";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       />
       <MovieCarousel title="watch later" movies={favorites} loading={loading} />
       <MovieCarousel title="watched" movies={watched} loading={loading} />
-      {selectedMovieId && <MovieDetailsModal />}
+      {selectedMovieId && <DetailCard />}
     </>
   );
 }

@@ -2,6 +2,13 @@ export interface Genre {
   id: number;
   name: string;
 }
+
+export interface CastMember {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+}
 export interface Movie {
   id: number;
   title: string;
@@ -12,7 +19,12 @@ export interface Movie {
   tagline?: string;
   runtime?: number;
   genres?: Genre[];
+  credits?: {
+    cast: CastMember[];
+  };
 }
+
+export type TabType = "info" | "trailer" | "actors";
 
 export interface TMDBResponse {
   results: Movie[];

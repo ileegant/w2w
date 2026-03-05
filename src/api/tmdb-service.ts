@@ -18,8 +18,12 @@ export const TmdbService = {
     return data.results;
   },
 
-  async getMovieDetails(id: number): Promise<Movie> {
-    const { data } = await apiClient.get<Movie>(`/movie/${id}`);
+  async getMovieDetails(
+    id: number
+  ): Promise<Movie & { credits: { cast: any[] } }> {
+    const { data } = await apiClient.get(
+      `/movie/${id}?append_to_response=credits`
+    );
     return data;
   },
 
