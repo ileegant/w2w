@@ -44,7 +44,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
             onClick={handleFavorite}
             className={`p-3 rounded-full transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 cursor-pointer ${
               isFav
-                ? "bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.5)]"
+                ? "bg-amber-500 text-black"
                 : "bg-white/10 text-white backdrop-blur-md hover:bg-white/20"
             }`}
           >
@@ -54,7 +54,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
             onClick={handleWatched}
             className={`p-3 rounded-full transition-colors cursor-pointer ${
               isWatched
-                ? "bg-emerald-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-110"
+                ? "bg-emerald-500 text-white"
                 : "bg-white/10 text-white backdrop-blur-md hover:bg-white/20 border border-white/10"
             }`}
           >
