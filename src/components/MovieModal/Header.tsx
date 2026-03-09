@@ -10,6 +10,13 @@ export default function Header({ movie }: HeaderProps) {
 
   const { title, tagline, vote_average, release_date, runtime } = movie;
 
+  const released = (() => {
+    if (!release_date) return false;
+    const releaseDate = new Date(release_date);
+    const today = new Date();
+    return releaseDate <= today;
+  })();
+
   return (
     <>
       <div>
@@ -17,17 +24,32 @@ export default function Header({ movie }: HeaderProps) {
         <p className="text-amber-500 italic mt-1">{tagline}</p>
       </div>
 
-      <div className="flex flex-wrap gap-4 text-sm text-neutral-400 font-medium">
-        <div className="flex items-center gap-1">
-          <Star size={16} className="fill-amber-500 text-amber-500" />
-          <span className="text-white">{vote_average.toFixed(1)}</span>
+      <div className="flex flex-wrap gap-1 text-sm text-neutral-400 font-medium">
+        {released ? (
+          <div className="flex items-center gap-1 bg-amber-500/10 text-amber-500 px-2 py-1 rounded-lg border border-amber-500/20">
+            <Star size={16} className="fill-amber-500" />
+            <span className="font-bold text-sm">
+              {vote_average > 0 ? vote_average.toFixed(1) : "N/A"}
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-1 bg-blue-500/10 text-blue-400 px-2 py-1 rounded-lg border border-blue-500/20">
+            <Clock size={16} />
+            <span className="text-xs font-bold uppercase">скоро у кіно</span>
+          </div>
+        )}
+
+        <div className="flex items-center gap-1 text-neutral-400 bg-neutral-900/50 px-2 py-1 rounded-lg border border-neutral-800">
+          <Calendar size={14} className="text-neutral-500" />
+          <span>{release_date?.split("-").reverse().join(".")}</span>
         </div>
-        <div className="flex items-center gap-1">
-          <Calendar size={16} /> {release_date.slice(0, 4)}
-        </div>
-        <div className="flex items-center gap-1">
-          <Clock size={16} /> {runtime} хв
-        </div>
+
+        {runtime && runtime > 0 && (
+          <div className="flex items-center gap-1 text-neutral-400 bg-neutral-900/50 px-2 py-1 rounded-lg border border-neutral-800">
+            <Clock size={14} className="text-neutral-500" />
+            <span>{runtime} хв</span>
+          </div>
+        )}
       </div>
     </>
   );
