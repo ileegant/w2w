@@ -17,18 +17,12 @@ export default function Cast({ movie }: CastProps) {
           key={actor.id}
           className="group flex flex-col bg-neutral-900/50 border border-neutral-800 text-neutral-50 rounded-2xl p-1 gap-1 shrink-0 snap-start hover:bg-neutral-900 transition-all duration-300 hover:-translate-y-2 w-auto"
         >
-          <div className="relative aspect-2/3 overflow-hidden rounded-xl bg-neutral-800">
+          <div className="flex justify-center items-center relative aspect-2/3 overflow-hidden rounded-xl bg-neutral-800">
             {!actor.profile_path ? (
-              <div className="flex justify-center">
-                <SquareUser className="text-neutral-500" />
-              </div>
+              <SquareUser className="w-18 h-18 text-neutral-500 group-hover:mb-18 transition-all" />
             ) : (
               <img
-                src={
-                  actor.profile_path
-                    ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
-                    : "https://via.placeholder.com/400x600?text=No+Photo"
-                }
+                src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                 alt={actor.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
